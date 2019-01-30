@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 const express = require('express');
 const chalk = require('chalk');
 const debug = require('debug')('app');
@@ -13,7 +12,7 @@ const port = process.env.PORT || 3000;
 
 const config = {
   user: 'pqvu',
-  password: 'P@ssword123',
+  password: '',
   server: 'vuphamtestdb.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
   database: 'PSLibrary',
   options: {
