@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./src/tests/**/*Tests.js --timeout 10000",
     "start": "DEBUG=app nodemon app.js",
     "start-rest": "DEBUG=app nodemon app-rest.js",
     "lint": "eslint app.js"
@@ -26,7 +26,11 @@
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.15.0",
-    "nodemon": "^1.18.9"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "should": "^13.2.3",
+    "sinon": "^7.2.3",
+    "supertest": "^3.4.2"
   },
   "nodemonConfig": {
     "restartable": "rs",

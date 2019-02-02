@@ -5,10 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Book = require('./src/models/bookModel');
 
-const db = mongoose.connect(
-  'mongodb://localhost/bookAPI',
-  { useNewUrlParser: true },
-);
+const db = mongoose.connect('mongodb://localhost/bookAPI', { useNewUrlParser: true });
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +18,8 @@ const bookRouter = require('./src/routes/bookRoutes')(Book);
 
 app.use('/api', bookRouter);
 
-app.listen(port, () => {
+app.server = app.listen(port, () => {
   debug(`Node is listening on ${port} `);
 });
+
+module.exports = app;
