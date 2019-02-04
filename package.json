@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./src/tests/**/*Tests.js --timeout 10000",
+    "start-static": "DEBUG=app nodemon app-static.js",
     "start": "DEBUG=app nodemon app.js",
-    "start-rest": "DEBUG=app nodemon app-rest.js",
     "lint": "eslint app.js"
   },
   "author": "",
@@ -18,6 +18,7 @@
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
     "mongoose": "^5.4.8",
     "morgan": "^1.9.1",
     "mssql": "^4.3.0"

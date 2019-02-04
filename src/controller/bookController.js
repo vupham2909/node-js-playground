@@ -1,5 +1,8 @@
+const debug = require('debug')('app');
+
 function bookController(Book) {
   function get(req, res) {
+    debug('get books hit');
     const { query } = req;
     Book.find(query, (err, books) => {
       if (err) return res.status(500).send(err);
@@ -21,10 +24,69 @@ function bookController(Book) {
     return res.json(book);
   }
 
-  return {
+  function getByIdAll(req, res) {
+    const { id } = req.params;
+    Book.findById(id, (err, book) => {
+      if (err) return res.status(500).send(err);
+      if (!book) return res.sendStatus(404);
+
+      req.book = book;
+      return true;
+    });
+  }
+
+  function getById(req, res) {
+    return res.json(req.book);
+  }
+
+  function putById(req, res) {
+    const { book } = req;
+    book.title = req.body.title;
+    book.genre = req.body.genre;
+    book.author = req.body.author;
+
+    book.save((err) => {
+      if (err) return res.status(500).send(err);
+      return res.json(book);
+    });
+
+    return res.send(book);
+  }
+
+  function patchById(req, res) {
+    const { book, body } = req;
+
+    // eslint-disable-next-line no-underscore-dangle
+    if (body._id) delete body._id;
+
+    Object.entries(body).forEach((element) => {
+      const key = element[0];
+      const value = element[1];
+      book[key] = value;
+    });
+
+    book.save((err) => {
+      if (err) return res.status(500).send(err);
+      return res.json(book);
+    });
+  }
+
+  function deleteById(req, res) {
+    req.book.remove((err) => {
+      if (err) return res.status(500).send(err);
+      return res.sendStatus(204);
+    });
+  }
+  const obj = {
     get,
     post,
+    getByIdAll,
+    getById,
+    putById,
+    patchById,
+    deleteById,
   };
+  return obj;
 }
 
 module.exports = bookController;
